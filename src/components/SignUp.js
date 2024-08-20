@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const [userEmail, setUserEmail] = useState();
@@ -32,7 +33,9 @@ const SignUp = () => {
     }
 
     if (password.length <= 8) {
-      setPasswordMatch("Minimum Password length should be equal to or more than 8");
+      setPasswordMatch(
+        "Minimum Password length should be equal to or more than 8"
+      );
 
       setTimeout(() => {
         setPasswordMatch(false);
@@ -112,12 +115,12 @@ const SignUp = () => {
           >
             Sign Up
           </button>
+          <div className="animate__animated animate__backInLeft animate__slow">
+            <button className="bg-green-400 p-4 relative hover:animate-none animate-pulse bg-gradient-to-r from-yellow-400 to-red-500 hover:from-pink-500 hover:to-purple-500 text-white font-bold py-3 px-8 rounded-full shadow-lg overflow-hidden transition-all duration-500 transform hover:scale-110 hover:bg-green-900 hover:text-white  ">
+              <Link to={"/login"}>Already have an account? Login</Link>
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="animate__animated animate__backInLeft animate__slow">
-        <button className="bg-green-400 p-4 relative hover:animate-none animate-pulse bg-gradient-to-r from-yellow-400 to-red-500 hover:from-pink-500 hover:to-purple-500 text-white font-bold py-3 px-8 rounded-full shadow-lg overflow-hidden transition-all duration-500 transform hover:scale-110 hover:bg-green-900 hover:text-white  ">
-          Already have an account? Login
-        </button>
       </div>
     </div>
   );
