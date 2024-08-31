@@ -6,16 +6,15 @@ const Authentication = React.createContext({
 });
 
 export const AuthenticationProvider = (props) => {
-  localStorage.getItem("token");
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const [isLoggedIn, setIsLoggedIn] = useState(token);
 
   const logInHandler = (token1) => {
     setIsLoggedIn(true);
     setToken(token1);
+    localStorage.setItem("token", token);
   };
 
-  localStorage.setItem("token", token);
 
   const ctx = {
     isLoggedIn: isLoggedIn,
