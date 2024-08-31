@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";           
 import Authentication from "./components/Authentication";
 import { Route, Routes, useNavigate } from "react-router-dom";
+import UserProfile from "./components/UserProfile";
 
 function App() {
   const ctx = useContext(Authentication);
@@ -16,16 +17,17 @@ function App() {
     if (ctx.isLoggedIn) {
       navigate("/home");
     } else {
-      // navigate('/login')
+      navigate('/login');
     }
-  }, [ctx.isLoggedIn, navigate]);
+  }, [ctx.isLoggedIn]);
 
   return (
     <div>
       <Routes>
         <Route index element={<SignUp />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/home" element={<Home />}></Route>
+        { !ctx.isLoggedIn && <Route path="/login" element={<Login />}></Route>}
+        { ctx.isLoggedIn && <Route path="/home" element={<Home />}></Route>}
+        <Route path="/userProfile" element={<UserProfile />}></Route>
       </Routes>
     </div>
   );
