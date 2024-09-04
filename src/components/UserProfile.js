@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useState,useRef, useEffect } from 'react'
 
 const UserProfile = () => {
 
@@ -6,12 +6,43 @@ const UserProfile = () => {
     const photoRef = useRef('');
     const token = localStorage.getItem('token');
 
-    // const photoUrlHandler = (e) => {
+    const [name , setName] = useState();
+    const [photo, setPhoto] = useState();
 
-    // };
+    const nameHandler = (e) => {
+        setName(e.target.value);
+    };
+    
+    const photoUrlHandler = (e) => {
+        setPhoto(e.target.value);
+    };
 
     const updateHandler = (e) => {
         updateProfile();
+    };
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = async () => {
+        const resp = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyAaDfIQlEPsBrQlUZpS0stYoPA8IVy7mA4', {
+            method: 'POST',
+            body: JSON.stringify({
+                idToken: token,
+            }),
+            headers: {
+                "Content-type" : "application/json",
+            },
+        })
+
+        const data = await resp.json();
+
+        if (resp.ok) {
+            console.log(data.users[0].fullName);
+            setName(data.users[0].fullName);
+            setPhoto(data.users[0].profilePhotoUrl)
+        }
     };
 
     const updateProfile = async () => {
@@ -47,9 +78,9 @@ const UserProfile = () => {
         <div>
             <div className="flex flex-col items-center justify-center mt-5 gap-5">
                 <label htmlFor='name'>Full Name:</label>
-                <div><input ref={nameRef} className="bg-white border p-3 rounded-lg border-black" type='text' id='name' /></div>
+                <div><input onChange={nameHandler} value={name} ref={nameRef} className="bg-white border p-3 rounded-lg border-black" type='text' id='name' /></div>
                 <label htmlFor='photo'>Profile Photo URL:</label>
-                <div><input ref={photoRef} className="bg-white border p-3 rounded-lg border-black" type='text' id='photo' /></div>
+                <div><input onChange={photoUrlHandler} value={photo} ref={photoRef} className="bg-white border p-3 rounded-lg border-black" type='text' id='photo' /></div>
             </div>
             <div className="text-center mt-5">
                 <button onClick={updateHandler} className="bg-green-800 m-auto p-2 rounded-xl border  text-white">Update</button>
