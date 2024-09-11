@@ -19,9 +19,8 @@ export const AuthenticationProvider = (props) => {
   const logOutHandler = (e) => {
     setToken(null);
     setIsLoggedIn(null);
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
   };
-
 
   const ctx = {
     isLoggedIn: isLoggedIn,
