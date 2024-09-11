@@ -6,6 +6,7 @@ import Authentication from "./components/Authentication";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import UserProfile from "./components/UserProfile";
 import ForgotPassword from "./components/ForgotPassword";
+import UserExpense from "./components/UserExpense";
 
 function App() {
   const ctx = useContext(Authentication);
@@ -30,6 +31,7 @@ function App() {
         {ctx.isLoggedIn && <Route path="/home" element={<Home />}></Route>}
         <Route path="/userProfile" element={<UserProfile />}></Route>
         <Route path="/forgot" element={<ForgotPassword />}></Route>
+        <Route path="/userExpense" element={<UserExpense />}></Route>
       </Routes>
     </div>
   );

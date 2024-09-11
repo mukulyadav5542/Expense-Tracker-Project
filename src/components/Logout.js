@@ -19,6 +19,9 @@ const Logout = () => {
           Logout
         </button>
       </Link>
+      <Link to={'/userExpense'}>
+        <div>Go to Expenses</div>
+      </Link>
     </div>
   );
 };
