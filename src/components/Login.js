@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import Authentication from "./Authentication";
 
 const Login = () => {
-
-    const ctx = useContext(Authentication);
-    console.log(ctx);
+  const ctx = useContext(Authentication);
+  console.log(ctx);
 
   const [enteredEmail, setEnteredEmail] = useState();
   const [enteredPassword, setEnteredPassword] = useState();
@@ -92,6 +91,11 @@ const Login = () => {
           >
             Log In
           </button>
+          <Link to={"/forgot"}>
+            <button className="bg-red-600 p-3 rounded-xl mt-4 text-white">
+              Forgot Password
+            </button>
+          </Link>
         </div>
       </div>
       <div>
